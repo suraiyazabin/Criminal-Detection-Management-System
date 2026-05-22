@@ -1,7 +1,5 @@
 <?php
 
-// ── AUTH ────────────────────────────────────────────────────
-
 function getUserByEmail($conn, $email)
 {
     $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE email = ? AND is_active = 1");
@@ -53,8 +51,6 @@ function changePassword($conn, $userId, $newHash)
     mysqli_stmt_bind_param($stmt, "si", $newHash, $userId);
     return mysqli_stmt_execute($stmt);
 }
-
-// ── CRIMINALS ───────────────────────────────────────────────
 
 function getAllCriminals($conn, $statusFilter = '')
 {
@@ -165,8 +161,6 @@ function searchCriminals($conn, $query)
     }
     return $criminals;
 }
-
-// ── CASES ───────────────────────────────────────────────────
 
 function getAllCases($conn, $statusFilter = '')
 {
@@ -279,8 +273,6 @@ function caseNumberExists($conn, $caseNumber)
     return mysqli_stmt_num_rows($stmt) > 0;
 }
 
-// ── EVIDENCE ────────────────────────────────────────────────
-
 function getEvidenceByCaseId($conn, $caseId)
 {
     $stmt = mysqli_prepare($conn,
@@ -317,8 +309,6 @@ function deleteEvidence($conn, $evidenceId)
     return mysqli_stmt_execute($stmt);
 }
 
-// ── REPORTS ─────────────────────────────────────────────────
-
 function getReportsByCaseId($conn, $caseId)
 {
     $stmt = mysqli_prepare($conn,
@@ -347,8 +337,6 @@ function addReport($conn, $caseId, $officerId, $title, $content, $reportType)
     mysqli_stmt_execute($stmt);
     return mysqli_insert_id($conn);
 }
-
-// ── ARRESTS ─────────────────────────────────────────────────
 
 function getArrestsByCriminalId($conn, $criminalId)
 {
@@ -384,8 +372,6 @@ function recordArrest($conn, $criminalId, $caseId, $arrestedBy, $arrestDate, $lo
 
     return mysqli_insert_id($conn);
 }
-
-// ── DASHBOARD STATS ─────────────────────────────────────────
 
 function getDashboardStats($conn)
 {
@@ -447,7 +433,7 @@ function getMostWanted($conn, $limit = 5)
     $result    = mysqli_stmt_get_result($stmt);
     $criminals = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $criminals[] = $row;
+        $criminals[i] = $row;
     }
     return $criminals;
 }
@@ -466,8 +452,6 @@ function getCasesPerMonth($conn)
     }
     return $data;
 }
-
-// ── OFFICERS dropdown ────────────────────────────────────────
 
 function getAllOfficers($conn)
 {
