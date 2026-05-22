@@ -8,7 +8,6 @@ require_once '../models/Close.php';
 $action = $_POST['action'] ?? '';
 $view   = $_GET['view']    ?? 'dashboard';
 
-// ── UPDATE PROFILE ───────────────────────────────────────────
 if ($action === 'update_profile') {
     $name        = htmlspecialchars(trim($_POST['name']         ?? ''));
     $phone       = htmlspecialchars(trim($_POST['phone']        ?? ''));
