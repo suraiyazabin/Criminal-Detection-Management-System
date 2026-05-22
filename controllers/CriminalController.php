@@ -7,7 +7,6 @@ require_once '../models/Close.php';
 
 $action = $_POST['action'] ?? $_GET['action'] ?? 'list';
 
-// ── SAVE new criminal ────────────────────────────────────────
 if ($action === 'save') {
     $fullName    = htmlspecialchars(trim($_POST['full_name']    ?? ''));
     $alias       = htmlspecialchars(trim($_POST['alias']        ?? ''));
@@ -23,7 +22,6 @@ if ($action === 'save') {
         $_SESSION['error'] = 'Full name is required.';
         header('Location: CriminalController.php?action=create'); exit;
     }
-
     $photoPath = '';
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
         $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
@@ -43,7 +41,6 @@ if ($action === 'save') {
     header('Location: CriminalController.php'); exit;
 }
 
-// ── UPDATE ───────────────────────────────────────────────────
 if ($action === 'update') {
     $criminalId  = (int)($_POST['criminal_id'] ?? 0);
     $fullName    = htmlspecialchars(trim($_POST['full_name']    ?? ''));
@@ -74,14 +71,13 @@ if ($action === 'update') {
         }
     }
 
-    updateCriminal($conn, $criminalId, $fullName, $alias, $dob, $gender, $nationality, $address, $photoPath, $threatLevel, $status, $description);
+  updateCriminal($conn, $criminalId, $fullName, $alias, $dob, $gender, $nationality, $address, $photoPath, $threatLevel, $status, $description);
     close($conn);
 
     $_SESSION['msg'] = 'Criminal record updated.';
     header('Location: CriminalController.php'); exit;
 }
 
-// ── DELETE ───────────────────────────────────────────────────
 if ($action === 'delete') {
     $criminalId = (int)($_POST['criminal_id'] ?? 0);
     if ($criminalId) {
@@ -93,7 +89,6 @@ if ($action === 'delete') {
     header('Location: CriminalController.php'); exit;
 }
 
-// ── AJAX SEARCH ──────────────────────────────────────────────
 if ($action === 'search_ajax') {
     $query     = htmlspecialchars(trim($_GET['q'] ?? ''));
     $conn      = connect();
@@ -104,7 +99,6 @@ if ($action === 'search_ajax') {
     exit;
 }
 
-// ── LOAD VIEW ────────────────────────────────────────────────
 $conn = connect();
 
 if ($action === 'create') {
