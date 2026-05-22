@@ -7,14 +7,12 @@ require_once '../models/Close.php';
 
 $action = $_POST['action'] ?? $_GET['action'] ?? 'login';
 
-// ── LOGOUT ──────────────────────────────────────────────────
 if ($action === 'logout') {
     session_destroy();
     header('Location: AuthController.php');
     exit;
 }
 
-// ── REGISTER SAVE ───────────────────────────────────────────
 if ($action === 'register_save') {
     $name        = htmlspecialchars(trim($_POST['name']         ?? ''));
     $email       = htmlspecialchars(trim($_POST['email']        ?? ''));
@@ -55,7 +53,6 @@ if ($action === 'register_save') {
     header('Location: AuthController.php'); exit;
 }
 
-// ── LOGIN SAVE ───────────────────────────────────────────────
 if ($action === 'login_save') {
     $email    = htmlspecialchars(trim($_POST['email']    ?? ''));
     $password = $_POST['password']                       ?? '';
@@ -86,7 +83,6 @@ if ($action === 'login_save') {
     header('Location: DashboardController.php'); exit;
 }
 
-// ── CHANGE PASSWORD ──────────────────────────────────────────
 if ($action === 'change_password') {
     require_once 'auth_guard.php';
 
