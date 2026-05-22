@@ -7,7 +7,6 @@ require_once '../models/Close.php';
 
 $action = $_POST['action'] ?? $_GET['action'] ?? 'list';
 
-// ── SAVE new case ────────────────────────────────────────────
 if ($action === 'save') {
     $caseNumber   = htmlspecialchars(trim($_POST['case_number']   ?? ''));
     $title        = htmlspecialchars(trim($_POST['title']         ?? ''));
@@ -36,7 +35,6 @@ if ($action === 'save') {
     header('Location: CaseController.php'); exit;
 }
 
-// ── UPDATE ───────────────────────────────────────────────────
 if ($action === 'update') {
     $caseId       = (int)($_POST['case_id']       ?? 0);
     $title        = htmlspecialchars(trim($_POST['title']         ?? ''));
@@ -60,7 +58,6 @@ if ($action === 'update') {
     header('Location: CaseController.php?action=view&id=' . $caseId); exit;
 }
 
-// ── DELETE ───────────────────────────────────────────────────
 if ($action === 'delete') {
     $caseId = (int)($_POST['case_id'] ?? 0);
     if ($caseId) {
@@ -72,7 +69,6 @@ if ($action === 'delete') {
     header('Location: CaseController.php'); exit;
 }
 
-// ── LINK CRIMINAL ────────────────────────────────────────────
 if ($action === 'link_criminal') {
     $caseId     = (int)($_POST['case_id']     ?? 0);
     $criminalId = (int)($_POST['criminal_id'] ?? 0);
@@ -86,7 +82,6 @@ if ($action === 'link_criminal') {
     header('Location: CaseController.php?action=view&id=' . $caseId); exit;
 }
 
-// ── ADD EVIDENCE ─────────────────────────────────────────────
 if ($action === 'add_evidence') {
     $caseId       = (int)($_POST['case_id']        ?? 0);
     $title        = htmlspecialchars(trim($_POST['ev_title']       ?? ''));
@@ -118,7 +113,6 @@ if ($action === 'add_evidence') {
     header('Location: CaseController.php?action=view&id=' . $caseId); exit;
 }
 
-// ── ADD REPORT ───────────────────────────────────────────────
 if ($action === 'add_report') {
     $caseId     = (int)($_POST['case_id']      ?? 0);
     $title      = htmlspecialchars(trim($_POST['rp_title']      ?? ''));
@@ -138,7 +132,6 @@ if ($action === 'add_report') {
     header('Location: CaseController.php?action=view&id=' . $caseId); exit;
 }
 
-// ── RECORD ARREST ────────────────────────────────────────────
 if ($action === 'record_arrest') {
     $criminalId = (int)($_POST['criminal_id']  ?? 0);
     $caseId     = (int)($_POST['case_id']      ?? 0);
@@ -159,7 +152,6 @@ if ($action === 'record_arrest') {
     header('Location: CaseController.php?action=view&id=' . $caseId); exit;
 }
 
-// ── DELETE EVIDENCE ───────────────────────────────────────────
 if ($action === 'delete_evidence') {
     $evidenceId = (int)($_POST['evidence_id'] ?? 0);
     $caseId     = (int)($_POST['case_id']     ?? 0);
@@ -172,7 +164,6 @@ if ($action === 'delete_evidence') {
     header('Location: CaseController.php?action=view&id=' . $caseId); exit;
 }
 
-// ── LOAD VIEW ────────────────────────────────────────────────
 $conn = connect();
 
 if ($action === 'create') {
