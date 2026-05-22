@@ -433,7 +433,7 @@ function getMostWanted($conn, $limit = 5)
     $result    = mysqli_stmt_get_result($stmt);
     $criminals = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $criminals[i] = $row;
+        $criminals[] = $row;
     }
     return $criminals;
 }
